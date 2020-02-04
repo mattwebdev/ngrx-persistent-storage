@@ -9,18 +9,27 @@ export const getAllDataFromLocalForage = (options: StorageConfig) => {
   config.storage = middlewareStorage;
   const driver = options.driver;
   if(driver === 'SESSIONSTORAGE') {
+    localForage.config({
+      name        : 'NGRX Storage',
+      version     : 1.0,
+      size        : 4980736,
+      storeName   : 'keyvaluepairs',
+      description : 'NGRX storage persist'
+    });
     localForage.defineDriver(sessionStorageDriver);
     localForage.setDriver(sessionStorageDriver._driver);
+  } else {
+    localForage.config({
+      driver      : driver || localForage.LOCALSTORAGE,
+      name        : 'NGRX Storage',
+      version     : 1.0,
+      size        : 4980736,
+      storeName   : 'keyvaluepairs',
+      description : 'NGRX storage persist'
+    });
+  
   }
-  localForage.config({
-    driver      : driver || localForage.LOCALSTORAGE,
-    name        : 'NGRX Storage',
-    version     : 1.0,
-    size        : 4980736,
-    storeName   : 'keyvaluepairs',
-    description : 'NGRX storage persist'
-  });
-
+  
   return localForage.keys()
     .then(keys => {
       return Promise.all(
