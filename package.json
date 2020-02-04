@@ -35,7 +35,8 @@
     "@types/json-stringify-safe": "^5.0.0",
     "deepmerge": "^4.0.0",
     "json-stringify-safe": "^5.0.1",
-    "localforage": "^1.7.3"
+    "localforage": "^1.7.3",
+    "localforage-driver-session-storage": "^1.0.4"
   },
   "deprecated": false,
   "description": "ngrx-store-persist depends on @ngrx/store and angular 2+",
