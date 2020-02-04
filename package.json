@@ -1,16 +1,49 @@
 {
-  "name": "ngrx-store-persist",
-  "version": "1.0.20",
+  "_from": "ngrx-store-persist",
+  "_id": "ngrx-store-persist@1.0.20",
+  "_inBundle": false,
+  "_integrity": "sha512-tA7C1fFp0Af26R6bzYq8E2b0/86YDMEi2EYUhk9dzqcRvUTGJ39HcrqMgtU1Urk54xupWXXfSCuTK1CkT053oQ==",
+  "_location": "/ngrx-store-persist",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ngrx-store-persist",
+    "name": "ngrx-store-persist",
+    "escapedName": "ngrx-store-persist",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ngrx-store-persist/-/ngrx-store-persist-1.0.20.tgz",
+  "_shasum": "42ef43aabb975f19011fe092b0146e9bd69a88e2",
+  "_spec": "ngrx-store-persist",
+  "_where": "C:\\Users\\matth\\OneDrive\\Documents\\GitHub\\WizeFiApp",
+  "author": {
+    "name": "Vitalii Ivanchyshyn"
+  },
+  "bugs": {
+    "url": "https://github.com/koriUA/rxjs-store-persist.git/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@ngrx/store": "^8.6.0",
+    "@types/json-stringify-safe": "^5.0.0",
+    "deepmerge": "^4.0.0",
+    "json-stringify-safe": "^5.0.1",
+    "localforage": "^1.7.3"
+  },
+  "deprecated": false,
   "description": "ngrx-store-persist depends on @ngrx/store and angular 2+",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc -p . --newLine lf",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {
+    "prettier": "1.18.2",
+    "typescript": "3.5.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/koriUA/rxjs-store-persist.git"
-  },
+  "homepage": "https://github.com/koriUA/rxjs-store-persist.git#readme",
   "keywords": [
     "redux",
     "ngrx",
@@ -20,21 +53,19 @@
     "websql",
     "persist"
   ],
-  "author": "Vitalii Ivanchyshyn",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/koriUA/rxjs-store-persist.git/issues"
-  },
-  "homepage": "https://github.com/koriUA/rxjs-store-persist.git#readme",
+  "main": "dist/index.js",
+  "name": "ngrx-store-persist",
   "peerDependencies": {
     "@ngrx/store": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0"
   },
-  "dependencies": {
-    "deepmerge": "^4.0.0",
-    "localforage": "^1.7.3"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koriUA/rxjs-store-persist.git"
   },
-  "devDependencies": {
-    "prettier": "1.18.2",
-    "typescript": "3.5.3"
-  }
+  "scripts": {
+    "build": "tsc -p . --newLine lf",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.20"
 }

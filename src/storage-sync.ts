@@ -2,14 +2,15 @@ import * as deepmerge from "deepmerge";
 import {validateStateKeys} from "./helpers";
 import {config} from "./options";
 
-const INIT_ACTION = '@ngrx/store/init';
-const UPDATE_ACTION = '@ngrx/store/update-reducers';
+import stringify = require('json-stringify-safe');
+const INIT_ACTION = "@ngrx/store/init";
+const UPDATE_ACTION = "@ngrx/store/update-reducers";
 
 export function storageSync(reducer: any) {
     const stateKeys = validateStateKeys(config.keys);
     const rehydratedState = rehydrateApplicationState(stateKeys, config.storage);
 
-    return function (state: any, action: any) {
+    return function(state: any, action: any) {
         let nextState;
 
         if ((action.type === INIT_ACTION) && !state) {
@@ -21,7 +22,7 @@ export function storageSync(reducer: any) {
             // @ts-ignore
             const overwriteMerge = (destinationArray: any, sourceArray: any) => sourceArray;
             const options: deepmerge.Options = {
-                arrayMerge: overwriteMerge
+                arrayMerge: overwriteMerge,
             };
             nextState = deepmerge(nextState, rehydratedState, options);
         }
@@ -32,7 +33,7 @@ export function storageSync(reducer: any) {
             syncStateUpdate(
                 nextState,
                 stateKeys,
-                config.storage
+                config.storage,
             );
         }
 
@@ -42,24 +43,23 @@ export function storageSync(reducer: any) {
 
 export const rehydrateApplicationState = (
     keys: any[],
-    storage: Storage
+    storage: Storage,
 ) => {
     return keys.reduce((acc, curr) => {
-        let key = curr;
+        const key = curr;
 
         if (storage !== undefined) {
-            let stateSlice = storage.getItem(key);
+            const stateSlice = storage.getItem(key);
             if (stateSlice) {
-                const isObjectRegex = new RegExp('{|\\[');
+                const isObjectRegex = new RegExp("{|\\[");
                 let raw = stateSlice;
 
-                if (stateSlice === 'null' || isObjectRegex.test(stateSlice.charAt(0))) {
+                if (stateSlice === "null" || isObjectRegex.test(stateSlice.charAt(0))) {
                     raw = JSON.parse(stateSlice);
                 }
 
-                return Object.assign({}, acc, {
-                    [key]: raw
-                });
+                return {...acc,
+                    [key]: raw};
             }
         }
         return acc;
@@ -69,31 +69,31 @@ export const rehydrateApplicationState = (
 export const syncStateUpdate = (
     state: any,
     keys: any[],
-    storage: Storage
+    storage: Storage,
 ) => {
-    keys.forEach(key => {
-        let stateSlice = state[key];
-        let replacer = undefined;
-        let space = undefined;
+    keys.forEach((key) => {
+        const stateSlice = state[key];
+        const replacer: any = null;
+        const space: any = null;
 
-        if (typeof stateSlice !== 'undefined' && storage !== undefined) {
+        if (typeof stateSlice !== "undefined" && storage !== undefined) {
             try {
                 storage.setItem(
                     key,
-                    typeof stateSlice === 'string'
+                    typeof stateSlice === "string"
                         ? stateSlice
-                        : JSON.stringify(stateSlice, replacer, space)
+                        : stringify(stateSlice, replacer, space),
                 );
             } catch (e) {
-                console.warn('Unable to save state to localStorage:', e);
+                console.warn("Unable to save state to localStorage:", e);
             }
-        } else if (typeof stateSlice === 'undefined') {
+        } else if (typeof stateSlice === "undefined") {
             try {
                 storage.removeItem(key);
             } catch (e) {
                 console.warn(
                     `Exception on removing/cleaning undefined '${key}' state`,
-                    e
+                    e,
                 );
             }
         }
